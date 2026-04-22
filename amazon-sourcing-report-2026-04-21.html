@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon Sourcing Momentum Report — April 21, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --border: #2a2a35;
+    --accent: #00e5a0;
+    --accent2: #ff6b35;
+    --accent3: #7b61ff;
+    --warn: #ffcc00;
+    --text: #e8e8f0;
+    --muted: #7a7a90;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --display: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 32px 120px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+    margin-bottom: 56px;
+  }
+
+  .report-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .report-label::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .date-badge {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  /* Section headers */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  /* Executive summary */
+  .exec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    .exec-grid { grid-template-columns: 1fr; }
+  }
+
+  .exec-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exec-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .exec-card:nth-child(1)::before { background: var(--accent); }
+  .exec-card:nth-child(2)::before { background: var(--accent2); }
+  .exec-card:nth-child(3)::before { background: var(--accent3); }
+
+  .exec-card h3 {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .exec-card:nth-child(1) h3 { color: var(--accent); }
+  .exec-card:nth-child(2) h3 { color: var(--accent2); }
+  .exec-card:nth-child(3) h3 { color: var(--accent3); }
+
+  .exec-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead tr {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+  .cat-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .cat-kitchen { background: rgba(0,229,160,0.1); color: var(--accent); border: 1px solid rgba(0,229,160,0.2); }
+  .cat-beauty { background: rgba(255,107,53,0.1); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
+  .cat-sports { background: rgba(123,97,255,0.1); color: var(--accent3); border: 1px solid rgba(123,97,255,0.2); }
+  .cat-pet { background: rgba(255,204,0,0.1); color: var(--warn); border: 1px solid rgba(255,204,0,0.2); }
+  .cat-home { background: rgba(100,180,255,0.1); color: #64b4ff; border: 1px solid rgba(100,180,255,0.2); }
+
+  .spike {
+    font-family: var(--mono);
+    font-weight: 500;
+    color: var(--accent2);
+  }
+
+  .spike-big { color: var(--accent); font-size: 14px; }
+
+  /* Priority cards */
+  .priority-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .priority-header {
+    background: var(--surface2);
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .priority-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .priority-title {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .signal-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .badge-green { background: rgba(0,229,160,0.12); color: var(--accent); border: 1px solid rgba(0,229,160,0.25); }
+  .badge-orange { background: rgba(255,107,53,0.12); color: var(--accent2); border: 1px solid rgba(255,107,53,0.25); }
+  .badge-purple { background: rgba(123,97,255,0.12); color: var(--accent3); border: 1px solid rgba(123,97,255,0.25); }
+
+  .priority-body {
+    padding: 24px;
+  }
+
+  .priority-body > * + * { margin-top: 20px; }
+
+  .product-links h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .link-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .link-row:last-child { border-bottom: none; }
+
+  .link-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .link-type-study { background: rgba(255,107,53,0.12); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
+  .link-type-comp { background: rgba(123,97,255,0.12); color: var(--accent3); border: 1px solid rgba(123,97,255,0.2); }
+
+  .link-row a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+
+  .link-row a:hover { color: var(--accent); text-decoration: underline; }
+
+  .diff-box {
+    background: rgba(0,229,160,0.05);
+    border: 1px solid rgba(0,229,160,0.15);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+
+  .diff-box h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .diff-box p {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .tariff-box {
+    background: rgba(255,204,0,0.04);
+    border: 1px solid rgba(255,204,0,0.15);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--warn);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tariff-box::before { content: '⚠'; font-size: 14px; }
+
+  /* Watch list */
+  .watch-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  @media (max-width: 560px) { .watch-grid { grid-template-columns: 1fr; } }
+
+  .watch-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .watch-card h4 {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .watch-card p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .trigger {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent3);
+    background: rgba(123,97,255,0.08);
+    border: 1px solid rgba(123,97,255,0.2);
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  /* Source note */
+  .source-note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    line-height: 1.7;
+  }
+
+  .source-note strong { color: var(--text); }
+
+  /* Priority matrix */
+  .matrix-wrap {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  @media (max-width: 700px) {
+    .matrix-wrap { display: none; }
+  }
+
+  .matrix-header {
+    background: var(--surface2);
+    padding: 10px 8px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .matrix-header:last-child { border-right: none; }
+
+  .matrix-cell {
+    background: var(--surface);
+    padding: 10px 8px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .matrix-cell:last-child { border-right: none; }
+  .matrix-row:last-child .matrix-cell { border-bottom: none; }
+
+  .matrix-row { display: contents; }
+
+  .matrix-name {
+    font-size: 11px;
+    color: var(--text);
+    text-align: left;
+    padding-left: 12px;
+  }
+
+  .check { color: var(--accent); font-size: 14px; }
+  .dash { color: var(--border); }
+
+  .star-3 { color: var(--accent); font-weight: 700; font-family: var(--mono); font-size: 13px; }
+  .star-2 { color: var(--warn); font-family: var(--mono); font-size: 13px; }
+  .star-1 { color: var(--muted); font-family: var(--mono); font-size: 13px; }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <header>
+    <div class="report-label">Live Intelligence · Amazon Sourcing</div>
+    <h1>Sourcing Momentum<br>Report</h1>
+    <span class="date-badge">Tuesday, April 21, 2026</span>
+  </header>
+
+  <!-- Executive Summary -->
+  <div class="section">
+    <div class="section-label">01 — Executive Summary</div>
+    <div class="exec-grid">
+      <div class="exec-card">
+        <h3>Convenience Upgrades</h3>
+        <p>Smart/cordless pet care (PETLIBRO), seasonal fan upgrades (DREO), and express self-tanner (b.tan) signal consumers paying a premium to automate or accelerate routines.</p>
+      </div>
+      <div class="exec-card">
+        <h3>Space Optimization</h3>
+        <p>Explosive demand for wall storage (14,581% spike on BAYKA shelves), vacuum bags, and home organization reflects spring apartment turnover and post-sale restocking cycles.</p>
+      </div>
+      <div class="exec-card">
+        <h3>Wellness Trends</h3>
+        <p>Google Trends and Exploding Topics both surface sustained growth in shower filters, sleep strips, blue light therapy, and hair repair — all pre-peak by search volume.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- High Momentum Movers -->
+  <div class="section">
+    <div class="section-label">02 — Consolidated High-Momentum Movers</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Product</th>
+            <th>Signal Source</th>
+            <th>Rank Note</th>
+            <th>Price Range</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cat-tag cat-kitchen">Kitchen</span></td>
+            <td>FoodSaver Vacuum Bags</td>
+            <td>Movers &amp; Shakers</td>
+            <td><span class="spike">#1 New</span></td>
+            <td>$26.99–$72.99</td>
+          </tr>
+          <tr>
+            <td><span class="cat-tag cat-beauty">Beauty</span></td>
+            <td>b.tan Dark Self Tanner Mousse</td>
+            <td>Movers &amp; Shakers</td>
+            <td><span class="spike">#1 New</span></td>
+            <td>$9.97–$34.95</td>
+          </tr>
+          <tr>
+            <td><span class="cat-tag cat-sports">Sports</span></td>
+            <td>Pogo Water Bottle</td>
+            <td>Movers &amp; Shakers + Google Trends</td>
+            <td><span class="spike">#1 (67% jump)</span></td>
+            <td>$6.56–$75.78</td>
+          </tr>
+          <tr>
+            <td><span class="cat-tag cat-pet">Pet</span></td>
+            <td>PETLIBRO Cordless Fountain</td>
+            <td>Movers &amp; Shakers</td>
+            <td><span class="spike">#1 New</span></td>
+            <td>$62.99–$81.61</td>
+          </tr>
+          <tr>
+            <td><span class="cat-tag cat-home">Home</span></td>
+            <td>DREO Tower Fan</td>
+            <td>Movers &amp; Shakers + Google Trends</td>
+            <td><span class="spike">#1 New</span></td>
+            <td>$59.98–$69.99</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Volatility Leaders -->
+  <div class="section">
+    <div class="section-label">03 — High-Volatility Leaders</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Product</th>
+            <th>Spike %</th>
+            <th>Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cat-tag cat-home">Home</span></td>
+            <td>BAYKA Floating Shelves</td>
+            <td><span class="spike spike-big">14,581%</span></td>
+            <td>Spring reorganization + apartment season; cross-confirmed by home organization macro trend</td>
+          </tr>
+          <tr>
+            <td><span class="cat-tag cat-beauty">Beauty</span></td>
+            <td>8 Pack Flat Hair Clips</td>
+            <td><span class="spike">121%</span></td>
+            <td>Likely TikTok-driven; low ASP limits margin — monitor only</td>
+          </tr>
+          <tr>
+            <td><span class="cat-tag cat-sports">Sports</span></td>
+            <td>AXV Vibration Plate</td>
+            <td><span class="spike">63%</span></td>
+            <td>Fitness Q2 surge; heavy/bulky — poor import margin profile</td>
+          </tr>
+          <tr>
+            <td><span class="cat-tag cat-pet">Pet</span></td>
+            <td>HONEY CARE Dog Wraps</td>
+            <td><span class="spike">28%</span></td>
+            <td>Niche utility product; watch for sustained velocity before sourcing</td>
+          </tr>
+          <tr>
+            <td><span class="cat-tag cat-home">Home</span></td>
+            <td>Hefty Party Cups</td>
+            <td><span class="spike">76%</span></td>
+            <td>Event-driven, seasonal. Not a private label opportunity.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Priority Matrix -->
+  <div class="section">
+    <div class="section-label">04 — Signal Cross-Reference Matrix</div>
+    <div class="matrix-wrap">
+      <div class="matrix-header">Product</div>
+      <div class="matrix-header">Movers &amp; Shakers</div>
+      <div class="matrix-header">Exploding Topics</div>
+      <div class="matrix-header">Google Trends</div>
+      <div class="matrix-header">Priority</div>
+
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-name">Floating Shelves</div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="dash">—</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="star-3">⭐⭐⭐</span></div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-name">Reusable Water Bottles</div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="dash">—</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="star-3">⭐⭐⭐</span></div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-name">Pet Fountain Filters</div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="dash">—</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="star-3">⭐⭐⭐</span></div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-name">Shower Water Filters</div>
+        <div class="matrix-cell"><span class="dash">—</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="star-3">⭐⭐⭐</span></div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-name">Mouth Tape / Sleep Strips</div>
+        <div class="matrix-cell"><span class="dash">—</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="star-3">⭐⭐⭐</span></div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-name">Blue Light Therapy Devices</div>
+        <div class="matrix-cell"><span class="dash">—</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="star-2">⭐⭐</span></div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-name">Hair Repair Masks</div>
+        <div class="matrix-cell"><span class="dash">—</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="star-2">⭐⭐</span></div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-name">Sauna Blankets</div>
+        <div class="matrix-cell"><span class="dash">—</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="check">✓</span></div>
+        <div class="matrix-cell"><span class="star-2">⭐⭐</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Priority Opportunities -->
+  <div class="section">
+    <div class="section-label">05 — Priority Opportunities · Act on Now</div>
+
+    <!-- Card 1 -->
+    <div class="priority-card">
+      <div class="priority-header">
+        <div>
+          <div class="priority-num">OPPORTUNITY 01</div>
+          <div class="priority-title">🏠 Floating Shelves / Wall Organizers</div>
+        </div>
+        <div class="signal-badges">
+          <span class="badge badge-green">Movers &amp; Shakers 14,581%</span>
+          <span class="badge badge-purple">Google Trends ↑</span>
+        </div>
+      </div>
+      <div class="priority-body">
+        <div class="product-links">
+          <h4>Trending Product to Study</h4>
+          <div class="link-row">
+            <span class="link-type link-type-study">STUDY</span>
+            <a href="https://www.amazon.com/BAYKA-Floating-Shelves-Bathroom-Capacity/dp/B0BQHV84H6" target="_blank">BAYKA Floating Shelves, Set of 3, Black, 15.7in — #1 Mover (14,581% spike)</a>
+          </div>
+        </div>
+        <div class="product-links">
+          <h4>Competitors to Benchmark for Gaps</h4>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/BAYKA-Floating-Shelves-Mounted-Bathroom/dp/B08J6NQMQ5" target="_blank">BAYKA Wall Mounted Floating Shelves, Set of 3 (smaller variant) — check review count vs. main listing</a>
+          </div>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/BAYKA-Shelves-Bedroom-Floating-Bathroom/dp/B0DHS1B776" target="_blank">BAYKA Wall Mounted Bathroom Shelves, Set of 4 — invisible bracket variant, 40 lb capacity</a>
+          </div>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/s?k=floating+shelves+set+of+6+matte+black+metal+bracket" target="_blank">Search: Floating Shelves Set of 6 Matte Black Metal Bracket — explore underserved larger-set niche</a>
+          </div>
+        </div>
+        <div class="diff-box">
+          <h4>Differentiation Angle</h4>
+          <p>Most listings cap at 3 shelves and 22 lbs. Source a set of 4–6 in matte black or natural bamboo with a 40+ lb weight rating, invisible brackets, and an included wall-mounting drill template. Bamboo construction sidesteps wooden furniture anti-dumping duty risk entirely.</p>
+        </div>
+        <div class="tariff-box">Tariff Note: MDF/bamboo shelves — HTS Chapter 44/94. Avoid solid wood to sidestep AD/CVD (up to 216%). Bamboo estimated ~25–30% total duty. Run your HTS code before ordering.</div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="priority-card">
+      <div class="priority-header">
+        <div>
+          <div class="priority-num">OPPORTUNITY 02</div>
+          <div class="priority-title">💧 Reusable Water Bottles (Niche)</div>
+        </div>
+        <div class="signal-badges">
+          <span class="badge badge-green">Sports #1, 67% Jump</span>
+          <span class="badge badge-purple">Google Trends ↑ #WaterTok</span>
+        </div>
+      </div>
+      <div class="priority-body">
+        <div class="product-links">
+          <h4>Trending Product to Study</h4>
+          <div class="link-row">
+            <span class="link-type link-type-study">STUDY</span>
+            <a href="https://www.amazon.com/Pogo-BPA-Free-Plastic-Water-Bottle/dp/B00WH1RTTU" target="_blank">Pogo Plastic Water Bottle with Chug Lid, 18oz–64oz — #1 Mover Sports (67% jump)</a>
+          </div>
+        </div>
+        <div class="product-links">
+          <h4>Competitors to Benchmark for Gaps</h4>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/dp/B0CRGJWDML" target="_blank">Pogo Plastic Water Bottle with Carry Handle, 18oz–40oz — straw lid variant, check review gaps</a>
+          </div>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/s?k=frost+buddy+32oz+insulated+water+bottle+straw+chug" target="_blank">Frost Buddy 32oz Insulated Stainless, Straw &amp; Chug Lid — mid-tier insulated, fewer reviews than Owala</a>
+          </div>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/s?k=CIVAGO+32oz+insulated+3+lids+wide+mouth" target="_blank">CIVAGO 32oz Wide Mouth with 3 Lids (Straw, Spout, Handle) — value bundle, low review count</a>
+          </div>
+        </div>
+        <div class="diff-box">
+          <h4>Differentiation Angle</h4>
+          <p>Source a 32oz insulated stainless bottle with dual-lid system (straw + chug) in 4–6 trending colorways not covered by top listings. Bundle with a cleaning brush. Price at $22–$28. The #WaterTok audience buys for aesthetics — color selection and lid versatility are the primary differentiators.</p>
+        </div>
+        <div class="tariff-box">Tariff Note: BPA-free plastic HTS 3923, stainless HTS 7323 — typically 5–10% total duty. One of the most tariff-friendly categories for China imports.</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="priority-card">
+      <div class="priority-header">
+        <div>
+          <div class="priority-num">OPPORTUNITY 03</div>
+          <div class="priority-title">🐾 Pet Fountain Replacement Filters</div>
+        </div>
+        <div class="signal-badges">
+          <span class="badge badge-green">Pet #1 New (PETLIBRO)</span>
+          <span class="badge badge-orange">Repeat Purchase</span>
+        </div>
+      </div>
+      <div class="priority-body">
+        <div class="product-links">
+          <h4>Branded Product Driving Demand</h4>
+          <div class="link-row">
+            <span class="link-type link-type-study">STUDY</span>
+            <a href="https://www.amazon.com/stores/PETLIBRO/page/6FDDA60A-B3DE-4509-BA9B-60125587F14B" target="_blank">PETLIBRO Cordless Fountain Store — browse to identify which fountain models are top sellers</a>
+          </div>
+        </div>
+        <div class="product-links">
+          <h4>Third-Party Filter Listings to Benchmark</h4>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/Fountain-Replacement-Compatible-Dispenser-Accessories/dp/B0GJDBS385" target="_blank">22+22 Pack Compatible Filters for PETLIBRO PLWF008 — current third-party leader, study pricing and reviews</a>
+          </div>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/Fountain-Replacement-Compatible-Dispenser-Accessories/dp/B0GJD52ZWC" target="_blank">8+8 Pack Dog Fountain Filters for PLWF008 — smaller pack entry price point</a>
+          </div>
+          <div class="link-row">
+            <span class="link-type link-type-comp">COMP</span>
+            <a href="https://www.amazon.com/PETLIBRO-Replacement-Stainless-Adjustable-Dispenser/dp/B08ZCTGNGD" target="_blank">PETLIBRO Official Filter — branded at premium price, your undercut target</a>
+          </div>
+        </div>
+        <div class="diff-box">
+          <h4>Differentiation Angle</h4>
+          <p>Source a universal multi-brand compatible filter kit working across PETLIBRO + PetSafe + Drinkwell. Bundle with a silicone fountain mat to catch spills. Multi-brand compatibility expands the addressable market and creates a stronger listing title. Tiny, ultra-lightweight, China-sourceable for pennies — ideal margin and repeat-purchase profile.</p>
+        </div>
+        <div class="tariff-box">Tariff Note: Filter media/carbon HTS Chapter 38/84 — estimated 25–30% total duty. At typical China COGS of $0.30–$0.80/unit, margins remain strong even at this rate.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Watch List -->
+  <div class="section">
+    <div class="section-label">06 — Watch List</div>
+    <div class="watch-grid">
+      <div class="watch-card">
+        <h4>Self-Tanner / Bronzer</h4>
+        <p>b.tan hit #1 Beauty but this is a spring-to-summer seasonal spike, not a year-round signal. Formulation and compliance complexity for skin products adds sourcing risk.</p>
+        <span class="trigger">Trigger: Re-evaluate in September for next spring</span>
+      </div>
+      <div class="watch-card">
+        <h4>AXV Vibration Plate</h4>
+        <p>63% spike confirms fitness demand, but vibration plates are heavy and bulky. Freight cost from China destroys margin on items over 10 lbs without premium pricing.</p>
+        <span class="trigger">Trigger: Only if you find a 2–4 lb mini variant</span>
+      </div>
+      <div class="watch-card">
+        <h4>Flat Hair Clips (8 Pack)</h4>
+        <p>121% spike is likely TikTok-driven. Low ASP ($6–$12), low margin, high competition. Saturates quickly once viral moment fades.</p>
+        <span class="trigger">Trigger: 3 more weeks of sustained velocity</span>
+      </div>
+      <div class="watch-card">
+        <h4>Blue Light Therapy Devices</h4>
+        <p>Strong Exploding Topics + Google Trends signal. Currently ~5% of red light volume but growing at the same rate. Held at ⭐⭐ only due to electronics compliance requirements.</p>
+        <span class="trigger">Trigger: Verify CE/FCC compliance path before sourcing</span>
+      </div>
+      <div class="watch-card">
+        <h4>Mouth Tape / Sleep Strips</h4>
+        <p>Genuinely exploding on Google Trends with high markup potential. Held back from top 3 only due to adhesive/skin-contact compliance and FDA classification questions.</p>
+        <span class="trigger">Trigger: Confirm FDA OTC/cosmetic classification</span>
+      </div>
+      <div class="watch-card">
+        <h4>Sauna Blankets</h4>
+        <p>Exploding Topics signal is real and the wellness thesis is strong. High ticket ($80–$200) and bulky. Needs careful supplier vetting for heating element safety certs.</p>
+        <span class="trigger">Trigger: Verify ETL/UL certification availability</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Source Note -->
+  <div class="section">
+    <div class="section-label">07 — Data Sources</div>
+    <div class="source-note">
+      <strong>Movers &amp; Shakers:</strong> User-provided pre-pulled report (April 21, 2026) covering Kitchen, Beauty, Sports, Pet Supplies, Home &amp; Kitchen categories.<br>
+      <strong>Exploding Topics:</strong> Retrieved via web search (direct fetch blocked); data from explodingtopics.com coverage and e-commerce trend blogs.<br>
+      <strong>Google Trends:</strong> Dual method — google-news-trends MCP server (live US trending terms, April 21 2026) + web search for product-specific trend articles.<br>
+      <strong>Amazon Listings:</strong> Live search results retrieved April 21, 2026. Review counts and rankings subject to change.
+    </div>
+  </div>
+
+  <footer>
+    <span>Amazon Sourcing Momentum Report</span>
+    <span>Generated April 21, 2026 · amazon-china-sourcing skill v2</span>
+  </footer>
+
+</div>
+</body>
+</html>
