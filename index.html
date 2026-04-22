@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Sourcing Report Landing Page</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --text: #e7ecf3;
+      --muted: #9aa4b2;
+      --accent: #4da3ff;
+      --border: #2a2f3a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+
+    .button.secondary {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .report-wrap {
+      flex: 1;
+      padding-bottom: 24px;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 180px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Amazon Sourcing Momentum Report</h1>
+      <p>Landing page for the April 21, 2026 report.</p>
+      <div class="actions">
+        <a class="button" href="./amazon-sourcing-report-2026-04-21.html" target="_blank" rel="noopener noreferrer">Open Report in New Tab</a>
+        <a class="button secondary" href="./amazon-sourcing-report-2026-04-21.html" download>Download Report</a>
+      </div>
+    </header>
+  </div>
+
+  <div class="container report-wrap">
+    <iframe
+      title="Amazon Sourcing Momentum Report"
+      src="./amazon-sourcing-report-2026-04-21.html">
+    </iframe>
+  </div>
+</body>
+</html>
