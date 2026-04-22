@@ -483,6 +483,10 @@
     letter-spacing: 0.05em;
   }
 
+  .mobile-report-links {
+    display: none;
+  }
+
   /* ── FADE-IN ANIMATION ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
@@ -504,6 +508,23 @@
       width: 100%;
       max-width: none;
       padding: 0 24px 60px;
+    }
+    .mobile-report-links {
+      display: flex;
+      gap: 10px;
+      padding-top: 16px;
+      flex-wrap: wrap;
+    }
+    .mobile-report-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 10px;
+      background: var(--bg2);
     }
     .hero { padding: 44px 0 36px; margin-bottom: 40px; }
     .hero h1 { font-size: 30px; }
@@ -569,6 +590,10 @@
 
   <!-- MAIN CONTENT -->
   <main>
+    <div class="mobile-report-links">
+      <a href="./index.html">Back to Reports</a>
+      <a href="./amazon-sourcing-report-2026-04-21.html">Open Other Report</a>
+    </div>
 
     <!-- HERO -->
     <header class="hero fade-up d1">

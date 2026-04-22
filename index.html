@@ -246,9 +246,6 @@
 
     setReport(reportFrame.getAttribute("src"));
     maybeShowLandscapeMessage();
-    if (isPhoneScreen.matches) {
-      openReportDirectlyOnPhone(openMobileBtn.href);
-    }
     window.addEventListener("orientationchange", maybeShowLandscapeMessage);
     window.addEventListener("resize", maybeShowLandscapeMessage);
   </script>
