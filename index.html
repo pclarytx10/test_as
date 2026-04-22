@@ -224,15 +224,19 @@
       const isPortrait = window.matchMedia("(orientation: portrait)").matches;
       if (isPhoneScreen.matches && isPortrait && !hasShownLandscapeMessage) {
         hasShownLandscapeMessage = true;
-        window.alert("For the best experience, view this page in landscape mode.");
+        window.alert("For the best view, view this page in landscape mode.");
       }
+    }
+
+    function openReportDirectlyOnPhone(path) {
+      window.location.href = path;
     }
 
     reportLinks.forEach((link) => {
       link.addEventListener("click", (event) => {
         const targetPath = link.dataset.report;
         if (isPhoneScreen.matches) {
-          window.location.href = targetPath;
+          openReportDirectlyOnPhone(targetPath);
           return;
         }
         event.preventDefault();
@@ -242,6 +246,9 @@
 
     setReport(reportFrame.getAttribute("src"));
     maybeShowLandscapeMessage();
+    if (isPhoneScreen.matches) {
+      openReportDirectlyOnPhone(openMobileBtn.href);
+    }
     window.addEventListener("orientationchange", maybeShowLandscapeMessage);
     window.addEventListener("resize", maybeShowLandscapeMessage);
   </script>
