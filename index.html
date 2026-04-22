@@ -124,6 +124,19 @@
       padding-bottom: 24px;
     }
 
+    .mobile-report-panel {
+      display: none;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .mobile-report-panel p {
+      margin-bottom: 10px;
+    }
+
     iframe {
       width: 100%;
       height: calc(100vh - 180px);
@@ -137,6 +150,14 @@
         align-items: flex-start;
         flex-direction: column;
         gap: 10px;
+      }
+
+      .report-wrap {
+        display: none;
+      }
+
+      .mobile-report-panel {
+        display: block;
       }
     }
   </style>
@@ -155,10 +176,14 @@
   <div class="container">
     <header>
       <h1>Amazon Sourcing Reports Landing Page</h1>
-      <p>Use the navigation links to switch between report pages in the embedded viewer.</p>
+      <p>Use the navigation links to switch reports. On phones, reports open directly for full-screen reading.</p>
       <div class="actions">
         <a id="openReportBtn" class="button" href="./amazon-sourcing-report-2026-04-21.html" target="_blank" rel="noopener noreferrer">Open Current Report in New Tab</a>
         <a id="downloadReportBtn" class="button secondary" href="./amazon-sourcing-report-2026-04-21.html" download>Download Current Report</a>
+      </div>
+      <div class="mobile-report-panel" id="mobileReportPanel">
+        <p>Embedded view is disabled on phone-sized screens so reports are easier to read.</p>
+        <a id="openMobileReportBtn" class="button" href="./amazon-sourcing-report-2026-04-21.html">Open Current Report</a>
       </div>
     </header>
   </div>
@@ -175,12 +200,18 @@
     const reportFrame = document.getElementById("reportFrame");
     const openBtn = document.getElementById("openReportBtn");
     const downloadBtn = document.getElementById("downloadReportBtn");
+    const openMobileBtn = document.getElementById("openMobileReportBtn");
     const reportLinks = document.querySelectorAll(".report-link");
+    const isPhoneScreen = window.matchMedia("(max-width: 760px)");
+    let hasShownLandscapeMessage = false;
 
     function setReport(path) {
-      reportFrame.src = path;
+      if (!isPhoneScreen.matches) {
+        reportFrame.src = path;
+      }
       openBtn.href = path;
       downloadBtn.href = path;
+      openMobileBtn.href = path;
 
       reportLinks.forEach((navLink) => {
         const isActive = navLink.dataset.report === path;
@@ -189,14 +220,30 @@
       });
     }
 
+    function maybeShowLandscapeMessage() {
+      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+      if (isPhoneScreen.matches && isPortrait && !hasShownLandscapeMessage) {
+        hasShownLandscapeMessage = true;
+        window.alert("For the best experience, view this page in landscape mode.");
+      }
+    }
+
     reportLinks.forEach((link) => {
       link.addEventListener("click", (event) => {
+        const targetPath = link.dataset.report;
+        if (isPhoneScreen.matches) {
+          window.location.href = targetPath;
+          return;
+        }
         event.preventDefault();
-        setReport(link.dataset.report);
+        setReport(targetPath);
       });
     });
 
     setReport(reportFrame.getAttribute("src"));
+    maybeShowLandscapeMessage();
+    window.addEventListener("orientationchange", maybeShowLandscapeMessage);
+    window.addEventListener("resize", maybeShowLandscapeMessage);
   </script>
 </body>
 </html>

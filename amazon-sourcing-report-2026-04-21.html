@@ -606,7 +606,11 @@
 
   @media (max-width: 760px) {
     nav { display: none; }
-    .wrap { padding: 0 16px 44px; }
+    .wrap {
+      width: 100%;
+      max-width: none;
+      padding: 0 16px 44px;
+    }
     header {
       padding: 36px 0 32px;
       margin-bottom: 36px;
@@ -1028,5 +1032,14 @@
 
   </main>
 </div>
+<script>
+  const hasSeenLandscapePrompt = sessionStorage.getItem('landscapePromptSeen') === '1';
+  const isPhoneScreen = window.matchMedia('(max-width: 820px)').matches;
+  const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+  if (isPhoneScreen && isPortrait && !hasSeenLandscapePrompt) {
+    sessionStorage.setItem('landscapePromptSeen', '1');
+    window.alert('For the best experience, view this page in landscape mode.');
+  }
+</script>
 </body>
 </html>
